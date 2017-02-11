@@ -9,9 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
-public class TicTacToe extends JFrame implements ActionListener {
+public class TicTacToe extends JFrame implements ActionListener{
 
-  private int emptySquaresLeft;
+  private int emptySquaresLeft = 9;
   private int count;
   private int countcomp;
 
@@ -33,14 +33,14 @@ public class TicTacToe extends JFrame implements ActionListener {
     JButton[][] squares = new JButton[3][3];
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args){
 
         // Создаем ссылку на конструктор TicTacToe
         new TicTacToe();
     }
 
     // Конструктор TicTacToe
-    public TicTacToe() {
+    public TicTacToe(){
         super("Крестики - Нолики");
 
         //Задаем размер окна
@@ -51,6 +51,9 @@ public class TicTacToe extends JFrame implements ActionListener {
 
         // Запрет на изменение размера окна
         setResizable(false);
+
+        // Устанавливаем окно по центру экрана
+        setLocationRelativeTo(null);
 
         //Вставляем созданную панель и устанавливаем шрифт для нее
         Font labelFont = new Font(Font.MONOSPACED, Font.BOLD, 25);
@@ -91,23 +94,19 @@ public class TicTacToe extends JFrame implements ActionListener {
         this.add("Center", p);
         this.add("South", p1);
 
-        // Устанавливаем окно по центру экрана
-        setLocationRelativeTo(null);
-
         // Делаем окно видимым
         setVisible(true);
-
     }
 
-    /**
+    /*
      * Этот метод будет обрабатывать все события
      *
-     * @param ActionEvent объект
+     *
      */
 
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e){
 
         Object theButton = e.getSource();
         // Это кнопка New Game ?
@@ -164,7 +163,7 @@ public class TicTacToe extends JFrame implements ActionListener {
         }
     } // конец метода actionPerformed
 
-    /**
+    /*
      * Этот метод вызывается после каждого хода, чтобы узнать,
      * есть ли победитель. Он проверяет каждый ряд, колонку
      * и диагональ, чтобы найти три клетки с одинаковыми надписями
@@ -282,13 +281,12 @@ public class TicTacToe extends JFrame implements ActionListener {
         return 0;
     }
 
-    /**
+    /*
      * Этот метод проверяет каждый ряд, колонку и диагональ
      * чтобы узнать, есть ли в ней две клетки
      * с одинаковыми надписями и пустой клеткой.
      *
-     * @param передается X – для пользователя и O – для компа
-     * @return количество свободных клеток,
+     * * @return количество свободных клеток,
      * или -1, если не найдено две клетки
      * с одинаковыми надписями
      */
@@ -306,7 +304,7 @@ public class TicTacToe extends JFrame implements ActionListener {
                     weight[i][j] = 0;
             }
         }
-        int twoWeights = player.equals("") ? -2 : 2;
+        int twoWeights = player.equals("O") ? -2 : 2;
 
 // Проверим, есть ли в ряду 1 две одинаковые клетки и
 // одна пустая.
@@ -396,11 +394,6 @@ public class TicTacToe extends JFrame implements ActionListener {
 
     } // конец метода findEmptySquare()
 
-    /**
-     * Этот метод выбирает любую пустую клетку
-     *
-     * @return случайно выбранный номер клетки
-     */
     int getRandomSquare() {
         boolean gotEmptySquare = false;
 
